@@ -2,13 +2,13 @@
 "use client";
 
 import { useUser } from '@clerk/nextjs';
-import { CarouselPlugin } from '@/components/ui/carousel-plugin';
-import AboutUs from '../components/AboutUs';
-import Navbar from '../components/Navbar';
-import CarouselCanchas from '@/components/CarouselCanchas';
-import { FAQ } from '@/components/Footer';
-import ContactUs from '@/components/ContactUs';
-import AboutUs2 from '@/components/AboutUs2';
+
+import AboutUs from './components/AboutUs';
+import Navbar from './components/Navbar';
+import CarouselCanchas from './components/CarouselCanchas';
+import { FAQ } from './components/Footer';
+import ContactUs from './components/ContactUs';
+import AboutUs2 from './components/AboutUs2';
 
 
 
@@ -27,9 +27,7 @@ export default function Home() {
 
 
       
-      <main className="pt-20 bg-[#008c9a]">
-        <CarouselPlugin />
-      </main>
+      
       
 
   

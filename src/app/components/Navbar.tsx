@@ -42,13 +42,13 @@ const Navbar: React.FC = () => {
       <div className="max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-20">
           <div className="flex items-center font-bold text-white">
-            {/* <Image
-              src=""
-              alt="Logo Orbix"
-              width={120}
+            { <Image
+              src="/OrbixLogo.png"
+              alt="OrionLogo"
+              width={130}
               height={120}
-              className="mr-3"
-            /> */}
+              className="mr-10"
+            /> }
           </div>
 
           <div className="flex lg:hidden">

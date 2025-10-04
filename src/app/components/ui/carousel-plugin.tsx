@@ -4,7 +4,7 @@ import * as React from "react"
 import Image from "next/image"
 import Autoplay from "embla-carousel-autoplay"
 
-import { Card } from "@/components/ui/card"
+import { Card } from "@/components/ui/Card"
 import {
   Carousel,
   CarouselContent,
