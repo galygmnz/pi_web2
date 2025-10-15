@@ -3,13 +3,8 @@
 import Image from "next/image";
 import { useState, useEffect } from "react";
 import { Menu, X } from "lucide-react";
-import {
-  SignInButton,
-  SignUpButton,
-  SignedIn,
-  SignedOut,
-  UserButton,
-} from "@clerk/nextjs";
+// Authentication was using Clerk. Removed Clerk to switch to JWT.
+// TODO: Integrate JWT auth and replace the static buttons below with real logic.
 
 const Navbar: React.FC = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
@@ -85,23 +80,16 @@ const Navbar: React.FC = () => {
             </a>
 
             <div className="ml-0 lg:ml-4 mt-2 lg:mt-0">
-              <SignedIn>
-                <UserButton afterSignOutUrl="/" />
-              </SignedIn>
-              <SignedOut>
-                <div className="flex items-center gap-4">
-                  <SignInButton mode="modal">
-                    <button className="px-6 py-2 rounded-full bg-cyan-900 text-lime-200 font-semibold hover:bg-[#87AECE] transition">
-                      Iniciar Sesión
-                    </button>
-                  </SignInButton>
-                  <SignUpButton mode="modal">
-                    <button className="px-6 py-2 rounded-full bg-cyan-900 text-lime-200 font-semibold hover:bg-[#87AECE] transition">
-                      Registrarse
-                    </button>
-                  </SignUpButton>
-                </div>
-              </SignedOut>
+              {/* TODO: Replace with JWT-based conditional UI. For now show static buttons */}
+              <div className="flex items-center gap-4">
+                <button className="px-6 py-2 rounded-full bg-cyan-900 text-lime-200 font-semibold hover:bg-[#87AECE] transition">
+                  Iniciar Sesión
+                </button>
+                <button className="px-6 py-2 rounded-full bg-cyan-900 text-lime-200 font-semibold hover:bg-[#87AECE] transition">
+                  Registrarse
+                </button>
+              </div>
+              {/* When implementing login, show user menu here instead of the buttons */}
             </div>
           </div>
         </div>

@@ -2,7 +2,7 @@
 
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Pagination } from "swiper/modules";
-import { SignInButton, SignedIn, SignedOut } from "@clerk/nextjs";
+// Clerk removed: using static buttons for now. TODO: wire JWT auth.
 import { motion } from "framer-motion";
 
 import "swiper/css";
@@ -83,18 +83,10 @@ export default function CarouselCanchas() {
                   transition={{ duration: 0.6, delay: 0.6 }}
                   className="mb-6"
                 >
-                  <SignedOut>
-                    <SignInButton mode="modal">
-                      <button className="px-5 py-2 font-semibold text-white bg-teal-600 rounded-md hover:bg-teal-700">
-                        Reservar
-                      </button>
-                    </SignInButton>
-                  </SignedOut>
-                  <SignedIn>
-                    <button className="px-5 py-2 font-semibold text-white bg-teal-600 rounded-lg hover:bg-teal-700">
-                      Reservar
-                    </button>
-                  </SignedIn>
+                  {/* Static reserve button for now; wire auth with JWT later */}
+                  <button className="px-5 py-2 font-semibold text-white bg-teal-600 rounded-lg hover:bg-teal-700">
+                    Reservar
+                  </button>
                 </motion.div>
               </div>
             </motion.div>
