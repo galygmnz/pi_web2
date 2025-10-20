@@ -8,7 +8,7 @@ import Navbar from './components/Navbar';
 import CarouselCanchas from './components/CarouselCanchas';
 import { FAQ } from './components/Footer';
 import ContactUs from './components/ContactUs';
-import AboutUs2 from './components/AboutUs2';
+import InitialSection from './components/InitialSection';
 
 
 
@@ -22,7 +22,7 @@ export default function Home() {
 
       
 
-
+    <InitialSection/>
 
       
       
@@ -38,7 +38,7 @@ export default function Home() {
       
 
       <AboutUs/>
-      <AboutUs2/>
+      
 
       
 

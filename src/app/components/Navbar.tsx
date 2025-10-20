@@ -39,7 +39,7 @@ const Navbar: React.FC = () => {
           <div className="flex items-center font-bold text-white">
             { <Image
               src="/OrbixLogo.png"
-              alt="OrionLogo"
+              alt="OrbixLogo"
               width={130}
               height={120}
               className="mr-10"
