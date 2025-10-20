@@ -9,11 +9,11 @@ import "swiper/css";
 import "swiper/css/pagination";
 
 const canchas = [
-  { id: 1, title: "Cancha 1", description: "Descripcion en desarrollo", image: "" },
-  { id: 2, title: "Cancha 2", description: "Descripcion en desarrollo", image: "" },
-  { id: 3, title: "Cancha 3", description: "Descripcion en desarrollo", image: "" },
-  { id: 4, title: "Cancha 4", description: "Descripcion en desarrollo", image: "" },
-  { id: 5, title: "Cancha 5", description: "Descripcion en desarrollo", image: "" },
+  { id: 1, title: "Unidad Deportiva La Floresta", description: "Disfruta de una cancha en grama sintética polifuncional y zona administrativa Cuenta con gradería central, cerramiento moderno y porterías para fútbol 11 y fútbol 7 Un espacio renovado y perfecto para compartir en familia ¡Ven y vive la experiencia!", image: "./Unidad deportiva la floresta.webp" },
+  { id: 2, title: "Coliseo Cubierto Ivan De Bedout", description: "Vive la emoción del deporte en uno de los escenarios más emblemáticos de Medellín. Con capacidad para 6 000 espectadores, el Coliseo Iván de Bedout es el hogar del baloncesto y el fútbol sala colombiano.", image: "./Coliseo de baloncesto ivan de bedout.jpg" },
+  { id: 3, title: "Unidad Deportiva Belen Andres Escobar", description: "Vive el deporte al máximo en uno de los complejos más completos de Medellín. Con amplias zonas verdes y modernas instalaciones, la Unidad Deportiva de Belén ofrece canchas de fútbol natural y sintético.", image: "./Unidad deportiva belen andres escobar.jpg" },
+  { id: 4, title: "Cancha Santa Lucia", description: "Descubre la energía deportiva del barrio Santa Lucía. Este moderno escenario cuenta con una cancha sintética de excelente calidad, perfecta para partidos de fútbol 5 y fútbol 7, con iluminación nocturna y zonas seguras para el público.", image: "Cancha Santa Lucia.jpg" },
+  { id: 5, title: "Cancha Campo Amor", description: "Vive la pasión del fútbol en la Cancha Campo Amor, ubicada en Guayabal Medellín. Este renovado escenario cuenta con una moderna superficie de grama sintética, iluminación de calidad y un entorno vibrante para entrenar, jugar o disfrutar con amigos.", image: "./Cancha Campo Amor.jpg" },
 ];
 
 export default function CarouselCanchas() {
