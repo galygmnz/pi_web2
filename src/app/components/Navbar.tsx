@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { useState, useEffect } from "react";
 import { Menu, X } from "lucide-react";
+import { useRouter } from "next/navigation"; 
 // Authentication was using Clerk. Removed Clerk to switch to JWT.
 // TODO: Integrate JWT auth and replace the static buttons below with real logic.
 
@@ -10,6 +11,8 @@ const Navbar: React.FC = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [showNavbar, setShowNavbar] = useState<boolean>(true);
   const [lastScrollY, setLastScrollY] = useState<number>(0);
+  const router = useRouter(); 
+
 
   useEffect(() => {
     const handleScroll = (): void => {
@@ -27,6 +30,10 @@ const Navbar: React.FC = () => {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, [lastScrollY]);
+
+    const handleLogin = () => {
+    router.push("./dashboard");
+  };
 
   return (
     <nav
@@ -82,7 +89,10 @@ const Navbar: React.FC = () => {
             <div className="ml-0 lg:ml-4 mt-2 lg:mt-0">
               {/* TODO: Replace with JWT-based conditional UI. For now show static buttons */}
               <div className="flex items-center gap-4">
-                <button className="px-6 py-2 rounded-full bg-cyan-900 text-lime-200 font-semibold hover:bg-[#87AECE] transition">
+                <button
+                  onClick={handleLogin}
+                  className="px-6 py-2 rounded-full bg-cyan-900 text-lime-200 font-semibold hover:bg-[#87AECE] transition"
+                >
                   Iniciar Sesión
                 </button>
                 <button className="px-6 py-2 rounded-full bg-cyan-900 text-lime-200 font-semibold hover:bg-[#87AECE] transition">
