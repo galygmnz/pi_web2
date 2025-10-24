@@ -8,6 +8,7 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 import "swiper/css/autoplay";
 import LayoutWrapper from "@/components/LayoutWrapper";
+import { AuthProvider } from "@/context/AuthContext";
 
 
 const geistSans = Geist({
@@ -36,7 +37,7 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-      <LayoutWrapper>{children}</LayoutWrapper>
+      <AuthProvider><LayoutWrapper>{children}</LayoutWrapper></AuthProvider>
       </body>
     </html>
   );

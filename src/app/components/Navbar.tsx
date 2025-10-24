@@ -32,7 +32,11 @@ const Navbar: React.FC = () => {
   }, [lastScrollY]);
 
     const handleLogin = () => {
-    router.push("./dashboard");
+    router.push("/auth/login");
+  };
+
+  const handleRegister = () => {
+    router.push("/auth/register");
   };
 
   return (
@@ -95,7 +99,10 @@ const Navbar: React.FC = () => {
                 >
                   Iniciar Sesión
                 </button>
-                <button className="px-6 py-2 rounded-full bg-cyan-900 text-lime-200 font-semibold hover:bg-[#87AECE] transition">
+                <button 
+                  onClick={handleRegister}
+                  className="px-6 py-2 rounded-full bg-cyan-900 text-lime-200 font-semibold hover:bg-[#87AECE] transition"
+                >
                   Registrarse
                 </button>
               </div>
