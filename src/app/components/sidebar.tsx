@@ -5,9 +5,16 @@ import { Button } from "@/components/ui/Button"
 import { Home, Calendar, ClipboardList, LogOut, Menu, User } from "lucide-react"
 import Link from "next/link"
 import Image from "next/image"
+import { useAuth } from "../context/AuthContext"
 
 
 export function Sidebar() {
+    const { user, logout } = useAuth();
+
+    const handleLogout = () => {
+        logout();
+    };
+
     return (
         <Sheet>
             <SheetTrigger asChild>
@@ -67,16 +74,19 @@ export function Sidebar() {
                                     <User className="h-6 w-6" />
                                 </div>
                                 <div>
-                                    <p className="text-sm font-medium">Usuario</p>
-                                    <p className="text-xs text-emerald-300">prueba@email.com</p>
+                                    <p className="text-sm font-medium">{user?.name || 'Usuario'}</p>
+                                    <p className="text-xs text-emerald-300">{user?.email || 'Sin correo'}</p>
                                 </div>
                             </div>
                         </div>
 
-                        <Link href="/" className="flex items-center space-x-3 text-red-300 hover:text-red-400 transition-colors">
+                        <button
+                            onClick={handleLogout}
+                            className="flex items-center space-x-3 text-red-300 hover:text-red-400 transition-colors w-full"
+                        >
                             <LogOut className="h-5 w-5" />
                             <span>Cerrar Sesión</span>
-                        </Link>
+                        </button>
                     </div>
                 </nav>
             </SheetContent>

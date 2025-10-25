@@ -84,7 +84,11 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
         const data = await res.json();
 
         console.log(data);
-        const userData: User = { name: data.username, id: data.id };
+        const userData: User = { 
+          name: data.username, 
+          id: data.id,
+          email: data.email // Asumiendo que el backend devuelve el email
+        };
         console.log("Sesión restaurada para el usuario:", userData);
         setUser(userData);
       } else if (res.status === 401 || res.status === 403) {
