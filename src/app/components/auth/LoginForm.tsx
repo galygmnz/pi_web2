@@ -55,7 +55,11 @@ const LoginForm: React.FC = () => {
       if (response.ok) {
         // ÉXITO: El backend devolvió { token: "...", user: {...} }
         const jwtToken: string = data.token;
-        const userData: User = { name: data.nombre, id: data.id };
+        const userData: User = { 
+          name: data.nombre, 
+          id: data.id,
+          email: data.email || formData.email // Usamos el email del formulario si el backend no lo devuelve
+        };
         // Llamamos a la función global de login
         login(jwtToken, userData);
       } else if (response.status === 401) {
