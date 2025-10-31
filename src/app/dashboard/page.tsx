@@ -1,7 +1,8 @@
 "use client";
 import React from "react";
-import { MapPin, Clock } from "lucide-react"; // íconos de lucide-react
-import Image from "next/image";
+import { MapPin, Clock } from "lucide-react"; 
+
+import Link from "next/link"; 
 
 export default function Page() {
   const canchas = [
@@ -9,20 +10,16 @@ export default function Page() {
       nombre: "Cancha Santa Lucía",
       ubicacion: "Cra. 80 #32-45, Medellín",
       horario: "6:00 AM - 10:00 PM",
-      
     },
     {
       nombre: "Cancha Campo Amor",
       ubicacion: "Cl. 16 #52-40, Medellín",
       horario: "7:00 AM - 9:00 PM",
-      
-      
     },
     {
       nombre: "Unidad Deportiva Belén",
       ubicacion: "Carrera 76 #18A-16, Medellín",
       horario: "5:00 AM - 11:00 PM",
-     
     },
   ];
 
@@ -37,7 +34,7 @@ export default function Page() {
       </div>
 
       <section>
-       <div className=" mb-8">
+        <div className=" mb-8">
           <h2 className="text-2xl font-bold text-gray-800">
             Elige tu cancha favorita y reserva tu próximo partido
           </h2>
@@ -46,6 +43,7 @@ export default function Page() {
           </p>
         </div>
 
+       
         <div className="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
           {canchas.map((cancha, index) => (
             <div
@@ -64,16 +62,22 @@ export default function Page() {
                   <Clock className="w-5 h-5 text-[#008c9a]" />
                   <span>{cancha.horario}</span>
                 </div>
-
-                <div>
-                  
-                </div>
-
-                
               </div>
             </div>
           ))}
         </div>
+       
+        
+        
+        <div className="mt-10 pt-4 border-t border-gray-300 flex justify-center">
+          <Link 
+            href="/dashboard/reservas" 
+            className="px-8 py-3 rounded-full font-bold text-white text-xl mt-10 bg-[#008c9a] hover:bg-[#007b85] transition-colors duration-200 text-center shadow-lg transform hover:scale-105"
+          >
+            Reserva ahora
+          </Link>
+        </div>
+        
       </section>
     </div>
   );
