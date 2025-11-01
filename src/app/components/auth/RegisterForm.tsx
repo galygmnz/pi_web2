@@ -82,7 +82,7 @@ const RegisterForm: React.FC = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-4 bg-white/10 p-8 rounded-2xl backdrop-blur-sm w-[500px]">
+  <form onSubmit={handleSubmit} className="space-y-4 bg-white/10 p-8 rounded-2xl backdrop-blur-sm w-full sm:w-[400px]">
       {/* Mensajes de Estado (Éxito y Error) */}
       {success && (
         <p className="p-3 bg-green-100 text-green-700 rounded-xl font-medium">
@@ -100,7 +100,7 @@ const RegisterForm: React.FC = () => {
         Esto se llama 'Controlled Component' en React.
       */}
 
-      <div className="grid grid-cols-2 gap-3">
+  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
         {/* Campo Nombre */}
         <div className="flex flex-col gap-3">
           <label
@@ -179,7 +179,7 @@ const RegisterForm: React.FC = () => {
       </div>
 
       {/* Campo Identificación */}
-      <div className="grid grid-cols-2 gap-3">
+  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
         <div className="flex flex-col gap-3">
           <label
             htmlFor="identificacion"

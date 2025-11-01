@@ -82,9 +82,11 @@ export default function CarouselCanchas() {
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.6, delay: 0.6 }}
                   className="mb-6"
+
+                
                 >
                   {/* Static reserve button for now; wire auth with JWT later */}
-                  <button className="px-5 py-2 font-semibold text-white bg-teal-600 rounded-lg hover:bg-teal-700">
+                  <button  className="px-5 py-2 font-semibold text-white bg-teal-600 rounded-lg hover:bg-teal-700">
                     Reservar
                   </button>
                 </motion.div>

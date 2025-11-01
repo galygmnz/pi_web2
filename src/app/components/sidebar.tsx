@@ -21,7 +21,7 @@ export function Sidebar() {
                 <Button
                     variant="outline"
                     size="icon"
-                    className="fixed bottom-4 left-4 z-50 bg-cyan-900 text-lime-200 hover:bg-cyan-100"
+                    className="fixed bottom-12 left-10 z-50 bg-cyan-900 text-lime-200 hover:bg-cyan-100"
                 >
                     <Menu className="h-5 w-5" />
                 </Button>
@@ -57,7 +57,7 @@ export function Sidebar() {
                             <Home className="h-5 w-5" />
                             <span>Inicio</span>
                         </Link>
-                        <Link href="/" className="flex items-center space-x-3 hover:text-neutral-300 transition-colors">
+                        <Link href="/dashboard/reservas" className="flex items-center space-x-3 hover:text-neutral-300 transition-colors">
                             <Calendar className="h-5 w-5" />
                             <span>Reservar</span>
                         </Link>

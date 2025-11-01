@@ -9,25 +9,27 @@ import {
   useEffect,
   useState,
 } from "react";
-import { User } from "../types/auth"; // Asegúrate de que 'User' esté definido en types/auth
+import { User } from "../types/auth";
 import { API_BASE_URL } from "@/utils/constants";
 
-// Tipos de Datos
 // -----------------------------------------------------------
-
-// 2. Tipo para el Contrato del Contexto (AuthContextType)
+// 1. Tipado del Contexto
+// -----------------------------------------------------------
 interface AuthContextType {
   user: User | null;
   isLoggedIn: boolean;
+  token: string | null;
   login: (token: string, userData: User) => void;
   logout: () => void;
 }
 
-// 3. Creación del Contexto
-// El tipo de dato es AuthContextType O undefined (para cuando no está inicializado)
+// -----------------------------------------------------------
+// 2. Creación del Contexto
+// -----------------------------------------------------------
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
-// 4. Custom Hook para usar el contexto
+// -----------------------------------------------------------
+// 3. Custom Hook
 // -----------------------------------------------------------
 export const useAuth = () => {
   const context = useContext(AuthContext);
@@ -37,86 +39,91 @@ export const useAuth = () => {
   return context;
 };
 
-// 5. Componente Proveedor (AuthProvider)
+// -----------------------------------------------------------
+// 4. Proveedor del Contexto
 // -----------------------------------------------------------
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
-  const [user, setUser] = useState<User | null>(null);
-  const router = useRouter(); // Hook de Next.js para manejar redirecciones
+  const router = useRouter(); // ✅ DEBE IR AQUÍ
 
+  const [user, setUser] = useState<User | null>(null);
+  const [token, setToken] = useState<string | null>(null);
   const isLoggedIn = !!user;
 
-  // A. Función para iniciar sesión (Llamada desde la página de login)
-  const login = (token: string, userData: User) => {
-    localStorage.setItem("authToken", token);
+  // A. Iniciar sesión
+  const login = (jwtToken: string, userData: User) => {
+    localStorage.setItem("authToken", jwtToken);
+    setToken(jwtToken);
     setUser(userData);
-    router.push("/dashboard"); // Redirige inmediatamente después de un login exitoso
+    router.push("/dashboard"); // ✅ Redirige después de login
   };
 
-  // B. Función para cerrar sesión (Llamada desde el Header/Sidebar)
+  // B. Cerrar sesión
   const logout = () => {
     localStorage.removeItem("authToken");
+    setToken(null);
     setUser(null);
-    router.push("/");
+    router.push("/"); // ✅ Redirige al inicio
   };
 
-  // C. Lógica para cargar/verificar el token guardado (Sesión Persistente)
+  // C. Cargar sesión persistente
   const loadUserFromStorage = useCallback(async () => {
-    const token = localStorage.getItem("authToken");
+    const storedToken = localStorage.getItem("authToken");
 
-    // Si no hay token guardado, terminamos el chequeo.
-    if (!token) {
+    if (!storedToken) {
       router.push("/");
       return;
     }
 
+    setToken(storedToken);
+
     try {
-      // Llamada al endpoint de verificación (con el token en el Header)
       const res = await fetch(`${API_BASE_URL}/api/auth/verify-token`, {
         method: "GET",
         headers: {
-          Authorization: `Bearer ${token}`, // Enviamos el token al backend
+          Authorization: `Bearer ${storedToken}`,
         },
       });
-      console.log(res.ok);
 
       if (res.ok) {
-        // CASO 1: Token Válido (200 OK)
         const data = await res.json();
 
-        console.log(data);
-        const userData: User = { 
-          name: data.username, 
+        const resolvedName =
+          data.nombre ||
+          data.name ||
+          data.username ||
+          (data.email ? data.email.split("@")[0] : undefined);
+
+        const userData: User = {
+          name: resolvedName || "",
           id: data.id,
-          email: data.email // Asumiendo que el backend devuelve el email
+          email: data.email,
         };
-        console.log("Sesión restaurada para el usuario:", userData);
+
         setUser(userData);
       } else if (res.status === 401 || res.status === 403) {
-        // CASO 3: Token Expirado o Inválido (401/403)
         console.warn("Token inválido o expirado. Forzando cierre de sesión.");
-        localStorage.removeItem("authToken"); // Eliminamos el token corrupto
+        localStorage.removeItem("authToken");
+        setToken(null);
         setUser(null);
       }
     } catch (error) {
-      // Fallo de red (el servidor no responde)
-      console.error(
-        "Error de red al verificar la sesión. Token será limpiado.",
-        error
-      );
+      console.error("Error verificando token:", error);
       localStorage.removeItem("authToken");
+      setToken(null);
       setUser(null);
     }
-  }, []); // Array vacío: La función es estable y solo se crea una vez.
+  }, [router]);
 
-  // D. Ejecución del efecto (Controla cuándo ejecutar loadUserFromStorage)
+  // D. Efecto para restaurar sesión al cargar la app
   useEffect(() => {
     loadUserFromStorage();
-  }, [loadUserFromStorage]); // Se ejecuta una sola vez al montar (gracias a useCallback)
+  }, [loadUserFromStorage]);
 
-  // 6. El Proveedor del Contexto (El Objeto de Contrato)
+  // E. Valor del contexto
   const value = {
     user,
     isLoggedIn,
+    token,
     login,
     logout,
   };

@@ -2,6 +2,7 @@
 
 import { Sidebar } from "../components/sidebar"
 import { BreadcrumbDashboard } from "@/components/Breadcrumb-dashboard"
+import { AuthProvider } from "../context/AuthContext";
 
 
 
@@ -11,6 +12,8 @@ export default function DashboardLayout({
   children: React.ReactNode;
 }) {
   return (
+
+    <AuthProvider>
     <div className="flex min-h-screen bg-[#008c9a]  ">
       <Sidebar />
       <main className="flex-1 p-6  space-y-10">
@@ -23,5 +26,6 @@ export default function DashboardLayout({
         </div>
       </main>
     </div>
+    </AuthProvider>
   );
 }

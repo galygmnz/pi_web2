@@ -12,27 +12,29 @@ export default function AuthLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div className="relative w-full h-screen rounded-3xl p-5">
-      <div className="w-full h-full absolute inset-0 rounded-3xl p-5">
-        <div className="relative w-full h-full inset-0">
-          <Image
-            src="/soccer-image.jpg"
-            alt="Background"
-            fill
-            priority
-            className="object-cover rounded-3xl opacity-80 -z-10"
-          />
-          <div className="absolute inset-0 bg-black/60 rounded-3xl -z-5"></div>
+    <div className="relative w-full min-h-screen bg-[#008c9a]">
+      {/* Contenedor centrado y responsive */}
+      <div className=" relative z-20 w-full h-full flex items-center">
+        <div className="w-full max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-center gap-8 p-5">
+          {/* Bloque izquierdo: logo + subtítulo (centrado en móvil, alineado a la izquierda en md+) */}
+          <div className="flex flex-col items-center md:items-start text-center md:text-left text-white drop-shadow-lg gap-4 w-full md:w-1/2">
+            <Image
+              src="/OrbixLogo.png"
+              alt="Orbix logo"
+              width={320}
+              height={320}
+              className="object-contain w-28 h-28 md:w-56 md:h-56 lg:w-64 lg:h-64"
+            />
+            
+          </div>
+
+          {/* Contenedor del formulario/children: centrado y con ancho responsive */}
+          <div className="w-full md:w-1/2 flex justify-center items-center">
+            <div className="w-full max-w-md">
+              {children}
+            </div>
+          </div>
         </div>
-      </div>
-      <div className="relative flex w-full h-full justify-between items-center p-5 z-20">
-        <div className="ml-20 text-white drop-shadow-lg">
-          <p className="text-7xl md:text-9xl font-extrabold leading-none">ORBIX</p>
-          <p className="text-xl md:text-3xl mt-3 text-white/90">
-            Organiza tus reservas de forma simple y eficiente
-          </p>
-        </div>
-        {children}
       </div>
     </div>
   );

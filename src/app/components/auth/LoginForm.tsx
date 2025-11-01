@@ -53,12 +53,15 @@ const LoginForm: React.FC = () => {
       const data = await response.json();
 
       if (response.ok) {
-        // ÉXITO: El backend devolvió { token: "...", user: {...} }
+        // ÉXITO: El backend puede devolver diferentes shapes.
         const jwtToken: string = data.token;
-        const userData: User = { 
-          name: data.nombre, 
-          id: data.id,
-          email: data.email || formData.email // Usamos el email del formulario si el backend no lo devuelve
+        // Normalizamos la estructura: a veces viene en data.user, a veces en la raíz
+        const payloadUser = data.user || data;
+        const resolvedName = payloadUser.nombre || payloadUser.name || payloadUser.username || (payloadUser.email ? payloadUser.email.split("@")[0] : formData.email.split("@")[0]);
+        const userData: User = {
+          name: resolvedName,
+          id: payloadUser.id,
+          email: payloadUser.email || formData.email,
         };
         // Llamamos a la función global de login
         login(jwtToken, userData);
@@ -83,7 +86,7 @@ const LoginForm: React.FC = () => {
   }, [push]);
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-7 bg-white/10 p-8 rounded-2xl backdrop-blur-sm w-[400px]">
+    <form onSubmit={handleSubmit} className="space-y-7 bg-white/10 p-8 rounded-2xl backdrop-blur-sm w-full sm:w-[400px]">
       {error && (
         <p className="p-3 bg-red-100 text-red-700 rounded-md font-medium">
           {error}
